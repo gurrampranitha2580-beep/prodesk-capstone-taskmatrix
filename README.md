@@ -119,18 +119,18 @@ TaskMatrix will be developed as a frontend application using technologies that s
 
 | Technology | Purpose |
 |------------|---------|
-| **Next.js** | Provides the application structure, routing, and page organization using the App Router. |
-| **Tailwind CSS** | Builds a responsive and consistent user interface with a utility-first styling approach. |
-| **Shadcn UI** | Provides reusable and accessible UI components. |
-| **Redux Toolkit** | Manages shared application state such as the selected project, authenticated user, tasks, filters, and activity updates. |
-| **@dnd-kit** | Enables drag-and-drop interactions for moving tasks across Kanban columns. |
-| **Mock Service Worker (MSW)** | Simulates API requests during frontend development without requiring a backend. |
-| **Local JSON Data** | Stores seeded project, task, and user data for development. |
-| **Local Storage** | Preserves user changes during development. |
-| **Figma** | Used to design application wireframes before development. |
-| **Draw.io** | Used to create the Redux state architecture diagram. |
-| **Git & GitHub** | Version control and project management throughout development. |
-
+| Next.js 15 (App Router) | Frontend framework, routing, and application structure |
+| JavaScript (ES6+) | Application logic and interactivity |
+| Tailwind CSS | Responsive, utility-first styling |
+| Shadcn UI | Accessible and reusable UI components |
+| Redux Toolkit | Global state management |
+| @dnd-kit | Drag-and-drop interactions for the Kanban board |
+| Mock Service Worker (MSW) | Mock API simulation during frontend development |
+| Local JSON | Seeded project, task, and user data |
+| localStorage | Frontend data persistence during development |
+| Figma | UI wireframes and design presentation |
+| Napkin AI | Frontend state tree and architecture visualization |
+| Git & GitHub | Version control and source code management |
 ---
 
 # Development Plan
@@ -190,8 +190,15 @@ The following features are outside the scope of the initial MVP but can be consi
 
 # State Architecture Diagram
 
-**Draw.io Diagram:**
-> *(To be added after creating the Redux state architecture.)*
+### Redux State Tree
+
+![Redux State Tree]<img width="557" height="1080" alt="_- visual selection (2)" src="https://github.com/user-attachments/assets/33f6ad93-a398-4974-b588-f7b9d1d38ed4" />
+
+
+### Mock API Endpoints
+
+![Mock API Endpoints]<img width="876" height="864" alt="_- visual selection (1)" src="https://github.com/user-attachments/assets/d049a59a-efa3-4fd7-b9e6-184c770d8267" />
+
 
 ---
 
