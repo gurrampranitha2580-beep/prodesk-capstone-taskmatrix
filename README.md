@@ -1,5 +1,6 @@
 # prodesk-capstone-taskmatrix
-# TaskMatrix
+
+# TaskMatrix-* *From backlog to release, in one workspace.*
 
 **Frontend Track Capstone Project**
 
@@ -202,15 +203,16 @@ The following features are outside the scope of the initial MVP but can be consi
 
 ---
 
-# Mock API Endpoints (Planned)
+# Mock API Endpoints 
 
 | Method | Endpoint | Purpose |
 |--------|----------|---------|
-| GET | /projects | Retrieve available projects |
-| GET | /projects/:id | Retrieve selected project details |
-| GET | /tasks | Retrieve project tasks |
-| POST | /tasks | Create a new task |
-| PATCH | /tasks/:id | Update task details |
-| DELETE | /tasks/:id | Delete a task |
-| GET | /users | Retrieve team members |
-| GET | /activities | Retrieve project activity history |
+| POST | /api/auth/login | Authenticate user and return role-based access |
+| GET | /api/projects | Retrieve available projects |
+| GET | /api/projects/:projectId | Retrieve selected project details |
+| GET | /api/projects/:projectId/tasks | Retrieve tasks for the selected project |
+| POST | /api/tasks | Create a new task |
+| PATCH | /api/tasks/:taskId | Update task status, priority, assignee, and due date |
+| DELETE | /api/tasks/:taskId | Delete a task |
+| GET | /api/users | Retrieve team members |
+| GET | /api/activity | Retrieve project activity history |
