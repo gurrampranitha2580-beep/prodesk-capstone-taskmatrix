@@ -192,12 +192,12 @@ The following features are outside the scope of the initial MVP but can be consi
 
 ### Redux State Tree
 
-![Redux State Tree]<img width="557" height="1080" alt="_- visual selection (2)" src="https://github.com/user-attachments/assets/33f6ad93-a398-4974-b588-f7b9d1d38ed4" />
+<img width="557" height="1080" alt="_- visual selection (2)" src="https://github.com/user-attachments/assets/33f6ad93-a398-4974-b588-f7b9d1d38ed4" />
 
 
 ### Mock API Endpoints
 
-![Mock API Endpoints]<img width="876" height="864" alt="_- visual selection (1)" src="https://github.com/user-attachments/assets/d049a59a-efa3-4fd7-b9e6-184c770d8267" />
+<img width="876" height="864" alt="_- visual selection (1)" src="https://github.com/user-attachments/assets/d049a59a-efa3-4fd7-b9e6-184c770d8267" />
 
 
 ---
