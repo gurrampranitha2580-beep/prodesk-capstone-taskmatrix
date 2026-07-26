@@ -10,7 +10,7 @@ I'm building a frontend-track capstone application based on an Agile project man
 
 
 
----
+
 
 
 
@@ -22,7 +22,7 @@ The assignment does not explicitly mention project CRUD. I assumed it because Ji
 
 
 
----
+
 
 
 
@@ -34,7 +34,7 @@ Should my application use roles like Admin, Project Manager, and Member, or shou
 
 
 
----
+
 
 
 
@@ -46,7 +46,7 @@ For an Agile project management application, which user flow makes more sense: L
 
 
 
----
+
 
 
 
@@ -58,7 +58,7 @@ My application has shared data across multiple screens: authentication, projects
 
 
 
----
+
 
 
 
@@ -70,7 +70,6 @@ Design a frontend state structure and mock API endpoint list for an Agile projec
 
 
 
----
 
 
 
