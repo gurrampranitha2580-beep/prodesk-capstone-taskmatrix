@@ -1,6 +1,6 @@
-# prodesk-capstone-taskmatrix
+# Prodesk-Capstone-Taskmatrix
 
-# TaskMatrix-* *From backlog to release, in one workspace.*
+# TaskMatrix-*From backlog to release, in one workspace.*
 
 **Frontend Track Capstone Project**
 
