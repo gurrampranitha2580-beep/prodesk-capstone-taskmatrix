@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/services/supabase/client";
 
+
 export default function LoginPage() {
   const router = useRouter();
 
@@ -16,6 +17,7 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -24,6 +26,8 @@ export default function LoginPage() {
       ...current,
       [name]: value,
     }));
+    setErrorMessage("");
+
   }
 
   async function handleSubmit(event) {
@@ -39,7 +43,7 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      alert(error.message);
+      setErrorMessage(error.message);
       return;
     }
 
@@ -176,6 +180,11 @@ export default function LoginPage() {
                 </button>
 
               </div>
+              {errorMessage && (
+                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {errorMessage}
+                </div>
+              )}
 
               <button
                 type="submit"

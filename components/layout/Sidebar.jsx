@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
@@ -16,6 +17,31 @@ import { supabase } from "@/services/supabase/client";
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [dashboardHref, setDashboardHref] = useState("/projects");
+  const [taskBoardHref, setTaskBoardHref] = useState("/task-board");
+
+  useEffect(() => {
+    async function loadDashboardProject() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        return;
+      }
+      const { data, error } = await supabase
+        .from("projects")
+        .select("id")
+        .eq("uid", user.id)
+        .limit(1)
+        .single();
+      if (!error && data) {
+        setDashboardHref(`/projects/${data.id}`);
+        setTaskBoardHref(`/task-board?project=${data.id}`);
+      }
+    }
+    loadDashboardProject();
+  }, []);
 
   const links = [
     {
@@ -25,12 +51,12 @@ export default function Sidebar() {
     },
     {
       name: "Dashboard",
-      href: "/projects/1",
+      href: dashboardHref,
       icon: LayoutDashboard,
     },
     {
       name: "Task Board",
-      href: "/task-board",
+      href: taskBoardHref,
       icon: KanbanSquare,
     },
     {
@@ -89,7 +115,7 @@ export default function Sidebar() {
 
             return (
               <Link
-                key={link.href}
+                key={link.name}
                 href={link.href}
                 className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
                   isActive(link)

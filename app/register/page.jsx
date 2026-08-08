@@ -14,7 +14,10 @@ export default function RegisterPage() {
     password: "",
   });
 
+  
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -23,6 +26,8 @@ export default function RegisterPage() {
       ...current,
       [name]: value,
     }));
+    setErrorMessage("");
+    setSuccessMessage("");
   }
 
   async function handleSubmit(event) {
@@ -44,13 +49,13 @@ export default function RegisterPage() {
     setLoading(false);
 
     if (error) {
-      alert(error.message);
+      setErrorMessage(error.message);
       return;
     }
-
-    alert("Account created successfully.");
-
-    router.push("/login");
+    setSuccessMessage("Account created successfully.");
+    setTimeout(() => {
+      router.push("/login");
+    }, 1000);  
   }
 
   return (
@@ -178,7 +183,16 @@ export default function RegisterPage() {
                 />
 
               </div>
-
+              {errorMessage && (
+                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {errorMessage}
+                </div>
+              )}
+              {successMessage && (
+                <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+                  {successMessage}
+                </div>
+              )}
               <button
                 type="submit"
                 disabled={loading}
