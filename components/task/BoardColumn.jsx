@@ -21,15 +21,29 @@ export default function BoardColumn({
 
       <div className="space-y-3">
 
-        {column.tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            onClick={onTaskClick}
-          />
-        ))}
+  {column.tasks.length === 0 ? (
+    <div className="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-center">
 
-      </div>
+      <p className="text-sm font-medium text-slate-600">
+        No tasks yet
+      </p>
+
+      <p className="mt-1 text-xs text-slate-400">
+        Create a new task to get started.
+      </p>
+
+    </div>
+  ) : (
+    column.tasks.map((task) => (
+      <TaskCard
+        key={task.id}
+        task={task}
+        onClick={onTaskClick}
+      />
+    ))
+  )}
+
+</div>
 
     </div>
   );

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { toast } from "sonner";
 import { supabase } from "@/services/supabase/client";
 
 export default function TaskDrawer({
@@ -12,6 +14,14 @@ export default function TaskDrawer({
   onTaskUpdated,
   onTaskDeleted,
 }) {
+  const genAI = new GoogleGenerativeAI(
+    process.env.NEXT_PUBLIC_GEMINI_API_KEY
+
+  );
+  
+  const model = genAI.getGenerativeModel({
+    model: "gemini-3.5-flash-lite",
+  });
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -25,6 +35,8 @@ export default function TaskDrawer({
   const [deleting, setDeleting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [error, setError] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState("");
 
   useEffect(() => {
     if (task) {
@@ -58,6 +70,42 @@ export default function TaskDrawer({
       ...current,
       [name]: value,
     }));
+  }
+  async function rewriteWithAI() {
+    if (!formData.description.trim()) {
+      setAiError("Please enter a description first.");
+      return;
+    }
+    setAiLoading(true);
+    setAiError("");
+    try {
+      
+      const result = await model.generateContent(`
+        You are a project manager.
+       
+        Rewrite the following task as a single professional sentence.
+        Rules:
+        - Keep the original meaning.
+        - Return only one rewritten version.
+        - Do not create multiple options.
+        - Do not use bullet points.
+        - Do not add explanations.
+        - Keep the response under 60 words.
+        - Make it sound like a task written in a project management tool.
+        
+        Task:
+        ${formData.description}
+      `);
+      const response = await result.response;
+      const improvedText = response.text();
+      setFormData((current) => ({
+        ...current,
+        description: improvedText,
+      }));
+    } catch (error) {
+      setAiError("Unable to rewrite the description.");
+    }
+    setAiLoading(false);
   }
 
   async function handleSubmit(event) {
@@ -108,6 +156,7 @@ export default function TaskDrawer({
       }
 
       onTaskUpdated(data);
+      toast.success("Task updated successfully.");
       onClose();
       return;
     }
@@ -130,6 +179,9 @@ export default function TaskDrawer({
     }
 
     onTaskCreated(data);
+    
+    toast.success("Task created successfully.");
+
     onClose();
   }
 
@@ -168,6 +220,7 @@ export default function TaskDrawer({
     setShowDeleteConfirm(false);
 
     onTaskDeleted(task.id);
+    toast.success("Task deleted successfully.");
     onClose();
   }
 
@@ -234,18 +287,32 @@ export default function TaskDrawer({
           </div>
 
           <div className="mt-6">
-            <label className="text-sm font-medium text-gray-600">
-              Description
-            </label>
-
-            <textarea
-              name="description"
-              rows={5}
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Add implementation details..."
-              className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
-            />
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-600">
+                Description
+              </label>
+              <button
+                type="button"
+                onClick={rewriteWithAI}
+                disabled={aiLoading}
+                className="text-sm font-medium text-indigo-600 hover:text-indigo-700 disabled:opacity-60">
+                {aiLoading
+                  ? "Rewriting..."
+                  : "✨ Rewrite with AI"}
+              </button>
+            </div>
+              <textarea
+                name="description"
+                rows={5}
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Add implementation details..."
+                className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"/>
+                {aiError && (
+                  <p className="mt-2 text-sm text-red-600">
+                    {aiError}
+                  </p>
+                )}
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-4">

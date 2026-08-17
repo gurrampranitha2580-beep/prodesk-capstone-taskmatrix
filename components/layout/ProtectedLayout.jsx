@@ -41,8 +41,9 @@ export default function ProtectedLayout({ children }) {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-
-      <main className="flex-1 bg-gray-50 p-8">
+      
+      <main className="w-full bg-gray-50 p-4 pt-16 md:ml-64 md:p-8">
+ 
         {children}
       </main>
     </div>
