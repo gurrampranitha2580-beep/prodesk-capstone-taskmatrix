@@ -26,3 +26,14 @@ The following prompts were used during the planning and architecture phase to re
 12. How can long assignee names be handled within Kanban task cards without breaking the layout?
 
 13. What is the most effective way to implement empty-state components for empty task columns while maintaining a professional SaaS interface?
+14. Prompt for ai feature:
+        You are a project manager.
+        Rewrite the following task as a single professional sentence.
+        Rules:
+        - Keep the original meaning.
+        - Return only one rewritten version.
+        - Do not create multiple options.
+        - Do not use bullet points.
+        - Do not add explanations.
+        - Keep the response under 60 words.
+        - Make it sound like a task written in a project management tool.
